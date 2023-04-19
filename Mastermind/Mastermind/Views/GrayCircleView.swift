@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct GrayCircleView: View {
+    var color: Color?
+
     var body: some View {
         Circle()
-            .fill(Color.gray)
+            .fill(color ?? Color.gray)
             .overlay(Circle().stroke(Color.black, lineWidth: 2))
             .frame(width: 40, height: 40)
     }
