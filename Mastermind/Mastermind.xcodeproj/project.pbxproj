@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF688CF429F00D8B004F8F55 /* GameboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF688CF329F00D8B004F8F55 /* GameboardView.swift */; };
+		EF688CFA29F02878004F8F55 /* ColorCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF688CF929F02878004F8F55 /* ColorCodeView.swift */; };
 		EF85078429EEA1A1006795D9 /* MastermindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85078329EEA1A1006795D9 /* MastermindApp.swift */; };
 		EF85078629EEA1A1006795D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85078529EEA1A1006795D9 /* ContentView.swift */; };
 		EF85078829EEA1A3006795D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF85078729EEA1A3006795D9 /* Assets.xcassets */; };
@@ -16,7 +18,6 @@
 		EF8507A129EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8507A029EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift */; };
 		EF8507AF29EEA8B0006795D9 /* GrayCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8507AE29EEA8B0006795D9 /* GrayCircleView.swift */; };
 		EFDD926229EFCE5B0057D32A /* MastermindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */; };
-		EFDD926429EFCF360057D32A /* MastermindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD926329EFCF360057D32A /* MastermindView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF688CF329F00D8B004F8F55 /* GameboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboardView.swift; sourceTree = "<group>"; };
+		EF688CF929F02878004F8F55 /* ColorCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodeView.swift; sourceTree = "<group>"; };
 		EF85078029EEA1A1006795D9 /* Mastermind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mastermind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF85078329EEA1A1006795D9 /* MastermindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindApp.swift; sourceTree = "<group>"; };
 		EF85078529EEA1A1006795D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,7 +52,6 @@
 		EF8507A029EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EF8507AE29EEA8B0006795D9 /* GrayCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayCircleView.swift; sourceTree = "<group>"; };
 		EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindViewModel.swift; sourceTree = "<group>"; };
-		EFDD926329EFCF360057D32A /* MastermindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +107,6 @@
 				EF85078729EEA1A3006795D9 /* Assets.xcassets */,
 				EF85078929EEA1A3006795D9 /* Preview Content */,
 				EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */,
-				EFDD926329EFCF360057D32A /* MastermindView.swift */,
 			);
 			path = Mastermind;
 			sourceTree = "<group>";
@@ -140,6 +141,8 @@
 			children = (
 				EF85078529EEA1A1006795D9 /* ContentView.swift */,
 				EF8507AE29EEA8B0006795D9 /* GrayCircleView.swift */,
+				EF688CF329F00D8B004F8F55 /* GameboardView.swift */,
+				EF688CF929F02878004F8F55 /* ColorCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,8 +278,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFDD926229EFCE5B0057D32A /* MastermindViewModel.swift in Sources */,
-				EFDD926429EFCF360057D32A /* MastermindView.swift in Sources */,
+				EF688CFA29F02878004F8F55 /* ColorCodeView.swift in Sources */,
 				EF8507AF29EEA8B0006795D9 /* GrayCircleView.swift in Sources */,
+				EF688CF429F00D8B004F8F55 /* GameboardView.swift in Sources */,
 				EF85078629EEA1A1006795D9 /* ContentView.swift in Sources */,
 				EF85078429EEA1A1006795D9 /* MastermindApp.swift in Sources */,
 			);

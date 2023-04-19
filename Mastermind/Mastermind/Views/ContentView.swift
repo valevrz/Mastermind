@@ -13,15 +13,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            MastermindView(circleColors: viewModel.circleColors)
+            ColorCodeView(colorCode: viewModel.colorCode)
             Spacer()
-            ForEach(0 ..< 12) { item in
-                HStack {
-                    ForEach(0 ..< 4) { item in
-                        GrayCircleView()
-                    }
-                }
-            }
+            GameboardView(viewModel: viewModel)
             Button("New Game") {
                 viewModel.newGame()
             }
