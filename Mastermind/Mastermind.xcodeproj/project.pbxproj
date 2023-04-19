@@ -15,6 +15,8 @@
 		EF85079F29EEA1A3006795D9 /* MastermindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF85079E29EEA1A3006795D9 /* MastermindUITests.swift */; };
 		EF8507A129EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8507A029EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift */; };
 		EF8507AF29EEA8B0006795D9 /* GrayCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8507AE29EEA8B0006795D9 /* GrayCircleView.swift */; };
+		EFDD926229EFCE5B0057D32A /* MastermindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */; };
+		EFDD926429EFCF360057D32A /* MastermindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD926329EFCF360057D32A /* MastermindView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		EF85079E29EEA1A3006795D9 /* MastermindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindUITests.swift; sourceTree = "<group>"; };
 		EF8507A029EEA1A3006795D9 /* MastermindUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EF8507AE29EEA8B0006795D9 /* GrayCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayCircleView.swift; sourceTree = "<group>"; };
+		EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindViewModel.swift; sourceTree = "<group>"; };
+		EFDD926329EFCF360057D32A /* MastermindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MastermindView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				EF8507AD29EEA884006795D9 /* Views */,
 				EF85078729EEA1A3006795D9 /* Assets.xcassets */,
 				EF85078929EEA1A3006795D9 /* Preview Content */,
+				EFDD926129EFCE5B0057D32A /* MastermindViewModel.swift */,
+				EFDD926329EFCF360057D32A /* MastermindView.swift */,
 			);
 			path = Mastermind;
 			sourceTree = "<group>";
@@ -268,6 +274,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFDD926229EFCE5B0057D32A /* MastermindViewModel.swift in Sources */,
+				EFDD926429EFCF360057D32A /* MastermindView.swift in Sources */,
 				EF8507AF29EEA8B0006795D9 /* GrayCircleView.swift in Sources */,
 				EF85078629EEA1A1006795D9 /* ContentView.swift in Sources */,
 				EF85078429EEA1A1006795D9 /* MastermindApp.swift in Sources */,

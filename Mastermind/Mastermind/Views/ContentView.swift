@@ -8,24 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    let colors: [Color] = [.red, .green, .blue, .yellow, .purple, .indigo]
-    @State var circleColors: [Color] = []
-
-    init() {
-            _circleColors = State(initialValue: colors.shuffled())
-        }
+    @StateObject var viewModel = MastermindViewModel()
 
     var body: some View {
         VStack {
             Spacer()
-            HStack {
-                ForEach(0..<4) { index in
-                    Circle()
-                        .foregroundColor(circleColors.indices.contains(index) ? circleColors[index] : .gray)
-                        .overlay(Circle().stroke(Color.black, lineWidth: 2))
-                        .frame(width: 40, height: 40)
-                }
-            }
+            MastermindView(circleColors: viewModel.circleColors)
             Spacer()
             ForEach(0 ..< 12) { item in
                 HStack {
@@ -35,7 +23,7 @@ struct ContentView: View {
                 }
             }
             Button("New Game") {
-                circleColors = colors.shuffled()
+                viewModel.newGame()
             }
         }
         .padding()
