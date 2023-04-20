@@ -12,7 +12,7 @@ struct GameboardView: View {
     
     //speichern den ausgewählten Kreis und seine Position
     @State private var selectedColor = Color.red
-    @State private var selectedRowIndex = 0
+    @State private var selectedRowIndex = 11
     @State private var selectedColumnIndex = 0
 
     var body: some View {
@@ -32,6 +32,12 @@ struct GameboardView: View {
                             }
                     }
                 }
+                .onAppear {
+                    selectedColumnIndex = 0
+                }
+                .onChange(of: selectedRowIndex) { value in
+                    selectedColumnIndex = 0
+                }
             }
             //zeigt die Farben an, aus denen man auswählen kann
             HStack(spacing: 20) {
@@ -39,12 +45,14 @@ struct GameboardView: View {
                     Button(action: {
                         //wenn man eine Farbe auswählt, wird sie dem Kreis an der ausgewählten Position zugewiesen
                         viewModel.selectColor(color, forRow: selectedRowIndex, column: selectedColumnIndex)
+                        selectedColumnIndex += 1 //dadurch muss man den nächsten Kreis nicht anklicken, um ihn einzufärben, wählt man eine Farbe wird automatisch der Kreis daneben eingefärbt
                     }) {
                         Circle()
                             .fill(color)
                             .frame(width: 35, height: 35)
                             .overlay(Circle().stroke(Color.black, lineWidth: 2))
                     }
+                    .disabled(selectedRowIndex <= 10)
                 }
             }
             .padding(.top, 20)
