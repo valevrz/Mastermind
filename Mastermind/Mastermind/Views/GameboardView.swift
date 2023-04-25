@@ -7,13 +7,27 @@
 
 import SwiftUI
 
-struct GameboardView: View {
-    @ObservedObject var viewModel: MastermindViewModel //um die Spiellogik auszuführen
+struct PurpleButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.title3)
+            .bold()
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(Color.purple)
+            .cornerRadius(10)
+            .padding(.top, 10)
+    }
+}
 
-    @State private var isRowLocked = false //wird true, wenn der Submit-Button angeklickt wird
+struct GameboardView: View {
+    @ObservedObject var viewModel: MastermindViewModel // um die Spiellogik auszuführen
+
+    @State private var isRowLocked = false // wird true, wenn der Submit-Button angeklickt wird
     @State private var lockedRows = 10
     
-    //speichern den ausgewählten Kreis und seine Position
+    // speichern den ausgewählten Kreis und seine Position
     @State private var selectedColor = Color.red
     @State private var selectedRowIndex = 11
     @State private var selectedColumnIndex = 0
@@ -23,11 +37,11 @@ struct GameboardView: View {
             ForEach(0 ..< 12) { rowIndex in
                 HStack {
                     ForEach(0 ..< 4) { columnIndex in
-                        //das ViewModel gibt für jede Position auf dem Spielbrett eine Farbe zurück
+                        // das ViewModel gibt für jede Position auf dem Spielbrett eine Farbe zurück
                         let circleColors = viewModel.getCircleColorsForRow(rowIndex)
                         let color = circleColors[columnIndex]
 
-                        //speichert die Position und die Farbe vom Kreis beim antippen
+                        // speichert die Position und die Farbe vom Kreis beim antippen
                         GrayCircleView(color: color)
                             .onTapGesture {
                                 if !isRowLocked {
@@ -39,17 +53,17 @@ struct GameboardView: View {
                 }
                 .onAppear {
                     selectedColumnIndex = 0
-                    isRowLocked = false //entsperrt die aktuelle Reihe
+                    isRowLocked = false // entsperrt die aktuelle Reihe
                 }
             }
-            //zeigt die Farben an, aus denen man auswählen kann
-            HStack(spacing:10) {
+            // zeigt die Farben an, aus denen man auswählen kann
+            HStack(spacing: 10) {
                 ForEach(viewModel.colors, id: \.self) { color in
                     Button(action: {
-                        //wenn man eine Farbe auswählt, wird sie dem Kreis an der ausgewählten Position zugewiesen
+                        // wenn man eine Farbe auswählt, wird sie dem Kreis an der ausgewählten Position zugewiesen
                         viewModel.selectColor(color, forRow: selectedRowIndex, column: selectedColumnIndex)
 
-                        //dadurch muss man den nächsten Kreis nicht anklicken, um ihn einzufärben, wählt man eine Farbe wird automatisch der Kreis daneben eingefärbt
+                        // dadurch muss man den nächsten Kreis nicht anklicken, um ihn einzufärben, wählt man eine Farbe wird automatisch der Kreis daneben eingefärbt
                         selectedColumnIndex += 1
                     }) {
                         Circle()
@@ -57,42 +71,28 @@ struct GameboardView: View {
                             .frame(width: 35, height: 35)
                             .overlay(Circle().stroke(Color.black, lineWidth: 2))
                     }
-                    .disabled(selectedRowIndex <= lockedRows || isRowLocked) //sperrt die Reihen 1-11
+                    .disabled(selectedRowIndex <= lockedRows || isRowLocked) // sperrt die Reihen 1-11
                 }
             }
             .padding(.top, 10)
 
-            //zeigt den Submit-Button und den New game Button
+            // zeigt den Submit-Button und den New game Button
             HStack {
-            Button(action: {
-                viewModel.newGame()
-                isRowLocked = false
-            }) {
-                Text("New Game")
+                Button(action: {
+                    viewModel.newGame()
+                    isRowLocked = false
+                }) {
+                    Text("New Game")
                 }
-                .font(.title3)
-                .bold()
-                .foregroundColor(.white)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 20)
-                .background(Color.purple)
-                .cornerRadius(10)
-                .padding(.top, 10)
+                .buttonStyle(PurpleButton())
 
-            Button(action: {
-                isRowLocked = true //sperrt die aktuelle Reihe
-                lockedRows -= 1
-            }) {
-                Text("Submit")
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 20)
-                    .background(Color.purple)
-                    .cornerRadius(10)
+                Button(action: {
+                    isRowLocked = true // sperrt die aktuelle Reihe
+                    lockedRows -= 1
+                }) {
+                    Text("Submit")
                 }
-                .padding(.top, 10)
+                .buttonStyle(PurpleButton())
             }
         }
         .padding()
