@@ -43,7 +43,7 @@ struct GameboardView: View {
                 }
             }
             //zeigt die Farben an, aus denen man auswählen kann
-            HStack(spacing:10) {
+            HStack(spacing: 10) {
                 ForEach(viewModel.colors, id: \.self) { color in
                     Button(action: {
                         //wenn man eine Farbe auswählt, wird sie dem Kreis an der ausgewählten Position zugewiesen
