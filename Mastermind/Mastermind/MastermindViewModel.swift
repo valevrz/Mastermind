@@ -13,6 +13,7 @@ class MastermindViewModel: ObservableObject {
     @Published var grayCircles = [[Color]]()
     @Published var colorCode = [Color]()
     @Published var selectedColor: Color?
+    @Published var randomColors = [Color]()
 
     init() {
         newGame()
@@ -23,7 +24,11 @@ class MastermindViewModel: ObservableObject {
     }
 
     func newGame() {
-        colorCode = colors.shuffled()
+        colorCode = [Color]()
+        for _ in 0...4 {
+            randomColors = colors.shuffled()
+            colorCode.append(randomColors[0])
+        }
         resetColors()
     }
 
