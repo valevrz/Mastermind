@@ -7,30 +7,16 @@
 
 import SwiftUI
 
-struct PurpleButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.title3)
-            .bold()
-            .foregroundColor(.white)
-            .padding(.vertical, 10)
-            .padding(.horizontal, 20)
-            .background(Color.purple)
-            .cornerRadius(10)
-            .padding(.top, 10)
-    }
-}
-
 struct GameboardView: View {
     @ObservedObject var viewModel: MastermindViewModel // um die Spiellogik auszuführen
 
-    @State private var isRowLocked = false // wird true, wenn der Submit-Button angeklickt wird
-    @State private var lockedRows = 10
+    @State var lockedRows = 10
+    @State var coloredRowIndex = 12
     
     // speichern den ausgewählten Kreis und seine Position
-    @State private var selectedColor = Color.red
-    @State private var selectedRowIndex = 11
-    @State private var selectedColumnIndex = 0
+    @State var selectedColor = Color.red
+    @State var selectedRowIndex = 11
+    @State var selectedColumnIndex = 0
 
     var body: some View {
         VStack {
@@ -44,51 +30,38 @@ struct GameboardView: View {
                         // speichert die Position und die Farbe vom Kreis beim antippen
                         GrayCircleView(color: color)
                             .onTapGesture {
-                                if !isRowLocked {
-                                    selectedRowIndex = rowIndex
-                                    selectedColumnIndex = columnIndex
-                                }
+                                selectedRowIndex = rowIndex
+                                selectedColumnIndex = columnIndex
                             }
+                            .opacity(rowIndex <= lockedRows ? 0.5 : 1.0) // reduziert die Deckkraft der Kreise in den gesperrten Reihen
                     }
                 }
-                .onAppear {
-                    selectedColumnIndex = 0
-                    isRowLocked = false // entsperrt die aktuelle Reihe
-                }
             }
-            // zeigt die Farben an, aus denen man auswählen kann
-            HStack(spacing: 10) {
-                ForEach(viewModel.colors, id: \.self) { color in
-                    Button(action: {
-                        // wenn man eine Farbe auswählt, wird sie dem Kreis an der ausgewählten Position zugewiesen
-                        viewModel.selectColor(color, forRow: selectedRowIndex, column: selectedColumnIndex)
-
-                        // dadurch muss man den nächsten Kreis nicht anklicken, um ihn einzufärben, wählt man eine Farbe wird automatisch der Kreis daneben eingefärbt
-                        selectedColumnIndex += 1
-                    }) {
-                        Circle()
-                            .fill(color)
-                            .frame(width: 35, height: 35)
-                            .overlay(Circle().stroke(Color.black, lineWidth: 2))
-                    }
-                    .disabled(selectedRowIndex <= lockedRows || isRowLocked) // sperrt die Reihen 1-11
-                }
-            }
+            // zeigt das Farbmenu
+            ColorMenuView(colors: viewModel.colors,
+                          viewModel: viewModel,
+                          selectedRowIndex: $selectedRowIndex,
+                          selectedColumnIndex: $selectedColumnIndex,
+                          lockedRows: $lockedRows,
+                          coloredRowIndex: $coloredRowIndex)
             .padding(.top, 10)
 
             // zeigt den Submit-Button und den New game Button
             HStack {
                 Button(action: {
                     viewModel.newGame()
-                    isRowLocked = false
+                    lockedRows = 10
+                    coloredRowIndex = 12
                 }) {
                     Text("New Game")
                 }
                 .buttonStyle(PurpleButton())
 
                 Button(action: {
-                    isRowLocked = true // sperrt die aktuelle Reihe
                     lockedRows -= 1
+                    selectedRowIndex -= 1
+                    selectedColumnIndex = 0
+                    coloredRowIndex -= 1
                 }) {
                     Text("Submit")
                 }
