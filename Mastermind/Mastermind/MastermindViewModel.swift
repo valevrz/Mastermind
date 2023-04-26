@@ -46,3 +46,17 @@ class MastermindViewModel: ObservableObject {
             grayCircles[row][column] = color
     }
 }
+
+struct PurpleButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.title3)
+            .bold()
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(Color.purple)
+            .cornerRadius(10)
+            .padding(.top, 10)
+    }
+}
