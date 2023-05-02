@@ -16,9 +16,6 @@ struct ContentView: View {
             ColorCodeView(colorCode: viewModel.colorCode)
             Spacer()
             GameboardView(viewModel: viewModel)
-            Button("New Game") {
-                viewModel.newGame()
-            }
         }
         .padding()
     }

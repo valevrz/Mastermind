@@ -13,6 +13,7 @@ class MastermindViewModel: ObservableObject {
     @Published var grayCircles = [[Color]]()
     @Published var colorCode = [Color]()
     @Published var selectedColor: Color?
+    @Published var randomColors = [Color]()
 
     init() {
         newGame()
@@ -23,7 +24,11 @@ class MastermindViewModel: ObservableObject {
     }
 
     func newGame() {
-        colorCode = colors.shuffled()
+        colorCode = [Color]()
+        for _ in 0...4 {
+            randomColors = colors.shuffled()
+            colorCode.append(randomColors[0])
+        }
         resetColors()
     }
 
@@ -39,5 +44,19 @@ class MastermindViewModel: ObservableObject {
     func selectColor(_ color: Color, forRow row: Int, column: Int) {
             guard row < grayCircles.count, column < grayCircles[row].count else { return }
             grayCircles[row][column] = color
+    }
+}
+
+struct PurpleButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.title3)
+            .bold()
+            .foregroundColor(.white)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(Color.purple)
+            .cornerRadius(10)
+            .padding(.top, 10)
     }
 }
