@@ -14,6 +14,13 @@ class MastermindViewModel: ObservableObject {
     @Published var colorCode = [Color]()
     @Published var selectedColor: Color?
     @Published var randomColors = [Color]()
+    @Published var feedbackCircles = [[Color]]()
+
+    var currentRowIndex = 11
+    var isGameOver = false
+
+    @Published var feedbackColors = [Color]()
+    var remainingGuess = [Color]()
 
     init() {
         newGame()
@@ -21,6 +28,7 @@ class MastermindViewModel: ObservableObject {
 
     func resetColors() {
         grayCircles = Array(repeating: Array(repeating: .gray, count: 4), count: 12)
+        feedbackCircles = Array(repeating: Array(repeating: .black, count: 4), count: 12)
     }
 
     func newGame() {
@@ -30,11 +38,12 @@ class MastermindViewModel: ObservableObject {
             colorCode.append(randomColors[0])
         }
         resetColors()
+        currentRowIndex = 11
     }
 
     func getCircleColorsForRow(_ row: Int) -> [Color] {
-            return grayCircles[row]
-        }
+        return grayCircles[row]
+    }
 
     func setColor(_ color: Color, row: Int, column: Int) {
         guard row < grayCircles.count, column < grayCircles[row].count else { return }
@@ -42,8 +51,75 @@ class MastermindViewModel: ObservableObject {
     }
 
     func selectColor(_ color: Color, forRow row: Int, column: Int) {
-            guard row < grayCircles.count, column < grayCircles[row].count else { return }
-            grayCircles[row][column] = color
+        guard row < grayCircles.count, column < grayCircles[row].count else { return }
+        grayCircles[row][column] = color
+    }
+
+    func getFeedbackCircleColorsForRow(_ row: Int) -> [Color] {
+        guard row < feedbackCircles.count else { return [.gray, .gray, .gray, .gray] }
+        return feedbackCircles[row]
+    }
+
+    func calculateFeedback() -> [Color] {
+        remainingGuess = []
+        feedbackColors = []
+        // Zähle die korrekten Farben an der richtigen Stelle
+        for i in 0..<4 {
+            if grayCircles[currentRowIndex][i] == colorCode[i] {
+                feedbackColors.append(.red)
+            } else {
+                remainingGuess.append(grayCircles[currentRowIndex][i])
+            }
+        }
+
+        // Zähle die korrekten Farben an der falschen Stelle
+        for i in 0..<4 {
+            if remainingGuess.contains(colorCode[i]) {
+                feedbackColors.append(.white)
+                // Zähle die falschen Farben
+                for _ in 0..<(4-feedbackColors.count){
+                    feedbackColors.append(.gray)
+                }
+                return feedbackColors
+            }
+        }
+        // Zähle die falschen Farben
+        for _ in 0..<(4-feedbackColors.count){
+            feedbackColors.append(.gray)
+        }
+
+        return feedbackColors
+    }
+
+    func submitGuess() {
+        guard !isGameOver else { return }
+
+        // Überprüfe, ob alle Felder in der aktuellen Reihe ausgewählt wurden
+        for column in 0..<4 {
+            if grayCircles[currentRowIndex][column] == .gray {
+                // Wenn ein Feld nicht ausgewählt wurde, breche ab
+                return
+            }
+        }
+
+        // Füge die Farben der aktuellen Reihe zum Feedback hinzu
+        feedbackColors = calculateFeedback()
+        feedbackCircles[currentRowIndex] = feedbackColors
+//        feedbackCircles.append(feedbackColors)
+
+        // Überprüfe, ob das Spiel gewonnen wurde
+        if feedbackColors == colorCode {
+            isGameOver = true
+        }
+
+        // Inkrementiere den Index für die aktuelle Reihe
+        currentRowIndex -= 1
+
+        // Wenn alle Reihen ausgewählt wurden, ist das Spiel verloren
+        if currentRowIndex == 0 {
+            isGameOver = true
+            return
+        }
     }
 }
 

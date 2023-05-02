@@ -22,6 +22,9 @@ struct GameboardView: View {
         VStack {
             ForEach(0 ..< 12) { rowIndex in
                 HStack {
+                    FeedbackCirclesView(feedbackColors: viewModel.getFeedbackCircleColorsForRow(rowIndex))
+                        .padding(.leading)
+                        .padding(.trailing, 6.0)
                     ForEach(0 ..< 4) { columnIndex in
                         // das ViewModel gibt für jede Position auf dem Spielbrett eine Farbe zurück
                         let circleColors = viewModel.getCircleColorsForRow(rowIndex)
@@ -37,6 +40,7 @@ struct GameboardView: View {
                     }
                 }
             }
+            .padding(.trailing, 94.0)
             // zeigt das Farbmenu
             ColorMenuView(colors: viewModel.colors,
                           viewModel: viewModel,
@@ -52,12 +56,15 @@ struct GameboardView: View {
                     viewModel.newGame()
                     lockedRows = 10
                     coloredRowIndex = 12
+                    selectedRowIndex = 11
+                    selectedColumnIndex = 0
                 }) {
                     Text("New Game")
                 }
                 .buttonStyle(PurpleButton())
 
                 Button(action: {
+                    viewModel.submitGuess()
                     lockedRows -= 1
                     selectedRowIndex -= 1
                     selectedColumnIndex = 0
