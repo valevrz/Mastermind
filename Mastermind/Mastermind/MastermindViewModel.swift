@@ -17,10 +17,11 @@ class MastermindViewModel: ObservableObject {
     @Published var feedbackCircles = [[Color]]()
 
     var currentRowIndex = 11
-    var isGameOver = false
+    @Published var isGameOver = false
 
     @Published var feedbackColors = [Color]()
     var remainingGuess = [Color]()
+    var remainingColorCode = [Color]()
 
     init() {
         newGame()
@@ -39,6 +40,7 @@ class MastermindViewModel: ObservableObject {
         }
         resetColors()
         currentRowIndex = 11
+        isGameOver = false
     }
 
     func getCircleColorsForRow(_ row: Int) -> [Color] {
@@ -63,24 +65,21 @@ class MastermindViewModel: ObservableObject {
     func calculateFeedback() -> [Color] {
         remainingGuess = []
         feedbackColors = []
+        remainingColorCode = colorCode
         // Zähle die korrekten Farben an der richtigen Stelle
         for i in 0..<4 {
             if grayCircles[currentRowIndex][i] == colorCode[i] {
                 feedbackColors.append(.red)
+                remainingColorCode[i] = .gray
             } else {
                 remainingGuess.append(grayCircles[currentRowIndex][i])
             }
         }
 
         // Zähle die korrekten Farben an der falschen Stelle
-        for i in 0..<4 {
-            if remainingGuess.contains(colorCode[i]) {
+        for i in 0..<(4-feedbackColors.count) {
+            if remainingGuess.contains(remainingColorCode[i]) {
                 feedbackColors.append(.white)
-                // Zähle die falschen Farben
-                for _ in 0..<(4-feedbackColors.count){
-                    feedbackColors.append(.gray)
-                }
-                return feedbackColors
             }
         }
         // Zähle die falschen Farben
@@ -108,7 +107,7 @@ class MastermindViewModel: ObservableObject {
 //        feedbackCircles.append(feedbackColors)
 
         // Überprüfe, ob das Spiel gewonnen wurde
-        if feedbackColors == colorCode {
+        if feedbackColors == [.red, .red, .red, .red] {
             isGameOver = true
         }
 
@@ -116,7 +115,7 @@ class MastermindViewModel: ObservableObject {
         currentRowIndex -= 1
 
         // Wenn alle Reihen ausgewählt wurden, ist das Spiel verloren
-        if currentRowIndex == 0 {
+        if currentRowIndex == -1 {
             isGameOver = true
             return
         }
