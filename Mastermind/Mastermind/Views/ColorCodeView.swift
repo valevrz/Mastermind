@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ColorCodeView: View {
     let colorCode: [Color]
+    var isGameOver: Bool
+
+
 
     var body: some View {
+        let color: [Color] = isGameOver ? colorCode : [.gray, .gray, .gray, .gray]
         VStack {
             // Display only one row
             ForEach(0..<1) { rowIndex in
@@ -19,7 +23,7 @@ struct ColorCodeView: View {
                     ForEach(0..<4) { columnIndex in
                         if rowIndex < colorCode.count { // check if the current index is valid
                             Circle()
-                                .foregroundColor(colorCode[columnIndex])
+                                .foregroundColor(color[columnIndex])
                                 .overlay(Circle().stroke(Color.black, lineWidth: 2))
                                 .frame(width: 40, height: 40)
                         }else{
@@ -35,6 +39,7 @@ struct ColorCodeView: View {
 
 struct ColorCodeView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green])
+        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green], isGameOver: false)
+        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green], isGameOver: true)
     }
 }

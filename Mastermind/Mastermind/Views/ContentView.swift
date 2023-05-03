@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            ColorCodeView(colorCode: viewModel.colorCode)
+            ColorCodeView(colorCode: viewModel.colorCode, isGameOver: viewModel.isGameOver)
             Spacer()
             GameboardView(viewModel: viewModel)
         }
