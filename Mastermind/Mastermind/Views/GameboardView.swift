@@ -36,7 +36,7 @@ struct GameboardView: View {
                                 selectedRowIndex = rowIndex
                                 selectedColumnIndex = columnIndex
                             }
-                            .opacity(rowIndex <= lockedRows ? 0.5 : 1.0) // reduziert die Deckkraft der Kreise in den gesperrten Reihen
+                            .opacity(rowIndex <= lockedRows && viewModel.isGameOver == false ? 0.5 : 1.0) // reduziert die Deckkraft der Kreise in den gesperrten Reihen
                     }
                 }
             }
@@ -65,10 +65,16 @@ struct GameboardView: View {
 
                 Button(action: {
                     viewModel.submitGuess()
-                    lockedRows -= 1
-                    selectedRowIndex -= 1
-                    selectedColumnIndex = 0
-                    coloredRowIndex -= 1
+                    if viewModel.isGameOver {
+                        lockedRows = 11
+                        coloredRowIndex = 12
+                    }else{
+                        lockedRows -= 1
+                        selectedRowIndex -= 1
+                        selectedColumnIndex = 0
+                        coloredRowIndex -= 1
+                    }
+
                 }) {
                     Text("Submit")
                 }

@@ -22,6 +22,8 @@ class MastermindViewModel: ObservableObject {
     @Published var feedbackColors = [Color]()
     var remainingGuess = [Color]()
     var remainingColorCode = [Color]()
+    @Published var wonGame = false
+    @Published var lostGame = false
 
     init() {
         newGame()
@@ -41,6 +43,8 @@ class MastermindViewModel: ObservableObject {
         resetColors()
         currentRowIndex = 11
         isGameOver = false
+        wonGame = false
+        lostGame = false
     }
 
     func getCircleColorsForRow(_ row: Int) -> [Color] {
@@ -77,7 +81,7 @@ class MastermindViewModel: ObservableObject {
         }
 
         // Zähle die korrekten Farben an der falschen Stelle
-        for i in 0..<(4-feedbackColors.count) {
+        for i in 0..<4 {
             if remainingGuess.contains(remainingColorCode[i]) {
                 feedbackColors.append(.white)
             }
@@ -109,6 +113,7 @@ class MastermindViewModel: ObservableObject {
         // Überprüfe, ob das Spiel gewonnen wurde
         if feedbackColors == [.red, .red, .red, .red] {
             isGameOver = true
+            wonGame = true
         }
 
         // Inkrementiere den Index für die aktuelle Reihe
@@ -117,6 +122,7 @@ class MastermindViewModel: ObservableObject {
         // Wenn alle Reihen ausgewählt wurden, ist das Spiel verloren
         if currentRowIndex == -1 {
             isGameOver = true
+            lostGame = true
             return
         }
     }
