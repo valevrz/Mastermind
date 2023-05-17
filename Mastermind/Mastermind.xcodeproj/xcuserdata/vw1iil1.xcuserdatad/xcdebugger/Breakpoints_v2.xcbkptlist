@@ -30,8 +30,8 @@
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "getCircleColorsForRow(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -104,14 +104,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "19F00D53-A3E3-43FA-9DE7-DA9105643B02"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "submitGuess()"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,24 +126,8 @@
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "submitGuess()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D9B16778-B768-483B-861A-8F41ED212EC0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mastermind/MastermindViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "submitGuess()"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +142,8 @@
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "resetColors()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,25 +158,9 @@
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "submitGuess()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "854B5FF9-F155-45B5-86AB-0C3195A5FC26"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mastermind/MastermindViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "calculateFeedback()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -206,8 +174,8 @@
             filePath = "Mastermind/MastermindViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "calculateFeedback()"
             landmarkType = "7">
          </BreakpointContent>
@@ -324,26 +292,11 @@
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "9762A384-6C9F-4952-A684-44FC038727B3 - f492a0ec80c6c6a8"
+                  uuid = "9762A384-6C9F-4952-A684-44FC038727B3 - fc429d89823903c9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.blur(radius: CoreGraphics.CGFloat, opaque: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in Mastermind.ContentView.body.getter : some"
-                  moduleName = "Mastermind"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vw1iil1/Developer/Mastermind/Mastermind/Mastermind/Views/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "622">
-               </Location>
-               <Location
-                  uuid = "9762A384-6C9F-4952-A684-44FC038727B3 - 334965de8e5c8dbb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.blur(radius: CoreGraphics.CGFloat, opaque: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in Mastermind.ContentView.body.getter : some"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.blur(radius: CoreGraphics.CGFloat, opaque: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in Mastermind.ContentView.body.getter : some"
                   moduleName = "Mastermind"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vw1iil1/Developer/Mastermind/Mastermind/Mastermind/Views/ContentView.swift"
@@ -351,9 +304,136 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
                   endingLineNumber = "21"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "767">
+               </Location>
+               <Location
+                  uuid = "9762A384-6C9F-4952-A684-44FC038727B3 - 675b70bdf0b0e57b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.blur(radius: CoreGraphics.CGFloat, opaque: Swift.Bool) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.animation(Swift.Optional&lt;SwiftUI.Animation&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in Mastermind.ContentView.body.getter : some"
+                  moduleName = "Mastermind"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vw1iil1/Developer/Mastermind/Mastermind/Mastermind/Views/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "22">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B7C2949-95B0-404D-A59D-9C5479E4C1D8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9498CA53-0F97-431B-8643-F8B4F182C49E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB2674FA-48C0-460D-85D6-3EF83887414D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0501D1DA-C39B-4F34-B6AD-6A7D7C2C7F80"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32752E70-07CC-4391-8D1B-5715B60B3D43"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "44EF1D74-29D8-4426-932D-336D002D8BAD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F3315A7-F32A-48D0-89DB-5970177C2D50"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mastermind/MastermindViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "calculateFeedback()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

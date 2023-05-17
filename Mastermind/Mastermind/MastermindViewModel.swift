@@ -8,6 +8,41 @@
 import Foundation
 import SwiftUI
 
+struct Feedback {
+    enum Infos {
+        case correct
+        case wrongPlace
+        case wrong
+    }
+
+    var state: [Infos]
+    private let size: Int
+
+    init(size: Int = 4) {
+        self.size = size
+        self.state = []
+    }
+
+    var colors: [Color] {state.map({
+        switch $0{
+        case .correct :
+            return .red
+        case .wrongPlace :
+            return .white
+        case .wrong :
+            return .gray
+        }
+    })}
+    
+    func isWon() -> Bool {
+        state.allSatisfy({$0 == .correct})
+    }
+
+    mutating func addInfo(infos: Infos) {
+        state.append(infos)
+    }
+}
+
 class MastermindViewModel: ObservableObject {
     let colors: [Color] = [.red, .green, .blue, .yellow, .purple, .indigo]
     @Published var grayCircles = [[Color]]()
@@ -30,8 +65,9 @@ class MastermindViewModel: ObservableObject {
     }
 
     func resetColors() {
-        grayCircles = Array(repeating: Array(repeating: .gray, count: 4), count: 12)
-        feedbackCircles = Array(repeating: Array(repeating: .black, count: 4), count: 12)
+        let columnCount = 4
+        grayCircles = Array(repeating: Array(repeating: .gray, count: columnCount), count: 12)
+        feedbackCircles = Array(repeating: Array(repeating: .black, count: columnCount), count: 12)
     }
 
     func newGame() {
@@ -66,14 +102,16 @@ class MastermindViewModel: ObservableObject {
         return feedbackCircles[row]
     }
 
-    func calculateFeedback() -> [Color] {
+    func calculateFeedback() -> Feedback {
         remainingGuess = []
-        feedbackColors = []
         remainingColorCode = colorCode
+        let size = 4
+        var feedback = Feedback(size: size)
+
         // Zähle die korrekten Farben an der richtigen Stelle
         for i in 0..<4 {
             if grayCircles[currentRowIndex][i] == colorCode[i] {
-                feedbackColors.append(.red)
+                feedback.addInfo(infos: .correct)
                 remainingColorCode[i] = .gray
             } else {
                 remainingGuess.append(grayCircles[currentRowIndex][i])
@@ -83,35 +121,27 @@ class MastermindViewModel: ObservableObject {
         // Zähle die korrekten Farben an der falschen Stelle
         for i in 0..<4 {
             if remainingGuess.contains(remainingColorCode[i]) {
-                feedbackColors.append(.white)
+                feedback.addInfo(infos: .wrongPlace)
+
             }
         }
         // Zähle die falschen Farben
-        for _ in 0..<(4-feedbackColors.count){
-            feedbackColors.append(.gray)
+        for _ in 0..<(size-feedback.state.count){
+            feedback.addInfo(infos: .wrong)
         }
 
-        return feedbackColors
+        return feedback
     }
 
     func submitGuess() {
         guard !isGameOver else { return }
 
-        // Überprüfe, ob alle Felder in der aktuellen Reihe ausgewählt wurden
-        for column in 0..<4 {
-            if grayCircles[currentRowIndex][column] == .gray {
-                // Wenn ein Feld nicht ausgewählt wurde, breche ab
-                return
-            }
-        }
-
         // Füge die Farben der aktuellen Reihe zum Feedback hinzu
-        feedbackColors = calculateFeedback()
-        feedbackCircles[currentRowIndex] = feedbackColors
-//        feedbackCircles.append(feedbackColors)
+        let feedback = calculateFeedback()
+        feedbackCircles[currentRowIndex] = feedback.colors
 
         // Überprüfe, ob das Spiel gewonnen wurde
-        if feedbackColors == [.red, .red, .red, .red] {
+        if feedback.isWon() {
             isGameOver = true
             wonGame = true
         }
