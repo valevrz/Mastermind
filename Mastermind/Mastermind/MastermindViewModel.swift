@@ -45,16 +45,17 @@ struct Feedback {
 
 class MastermindViewModel: ObservableObject {
     let colors: [Color] = [.red, .green, .blue, .yellow, .purple, .indigo]
+    let columnCount = 4
+    var rowCount = 12
     @Published var grayCircles = [[Color]]()
     @Published var colorCode = [Color]()
     @Published var selectedColor: Color?
     @Published var randomColors = [Color]()
     @Published var feedbackCircles = [[Color]]()
 
-    var currentRowIndex = 11
+    var currentRowIndex: Int = 0
     @Published var isGameOver = false
 
-    @Published var feedbackColors = [Color]()
     var remainingGuess = [Color]()
     var remainingColorCode = [Color]()
     @Published var wonGame = false
@@ -65,19 +66,18 @@ class MastermindViewModel: ObservableObject {
     }
 
     func resetColors() {
-        let columnCount = 4
-        grayCircles = Array(repeating: Array(repeating: .gray, count: columnCount), count: 12)
-        feedbackCircles = Array(repeating: Array(repeating: .black, count: columnCount), count: 12)
+        grayCircles = Array(repeating: Array(repeating: .gray, count: columnCount), count: rowCount)
+        feedbackCircles = Array(repeating: Array(repeating: .black, count: columnCount), count: rowCount)
     }
 
     func newGame() {
         colorCode = [Color]()
-        for _ in 0...4 {
+        for _ in 0..<columnCount {
             randomColors = colors.shuffled()
             colorCode.append(randomColors[0])
         }
         resetColors()
-        currentRowIndex = 11
+        currentRowIndex = rowCount - 1
         isGameOver = false
         wonGame = false
         lostGame = false
@@ -105,11 +105,10 @@ class MastermindViewModel: ObservableObject {
     func calculateFeedback() -> Feedback {
         remainingGuess = []
         remainingColorCode = colorCode
-        let size = 4
-        var feedback = Feedback(size: size)
+        var feedback = Feedback(size: columnCount)
 
         // Zähle die korrekten Farben an der richtigen Stelle
-        for i in 0..<4 {
+        for i in 0..<columnCount {
             if grayCircles[currentRowIndex][i] == colorCode[i] {
                 feedback.addInfo(infos: .correct)
                 remainingColorCode[i] = .gray
@@ -119,14 +118,14 @@ class MastermindViewModel: ObservableObject {
         }
 
         // Zähle die korrekten Farben an der falschen Stelle
-        for i in 0..<4 {
+        for i in 0..<columnCount {
             if remainingGuess.contains(remainingColorCode[i]) {
                 feedback.addInfo(infos: .wrongPlace)
 
             }
         }
         // Zähle die falschen Farben
-        for _ in 0..<(size-feedback.state.count){
+        for _ in 0..<(columnCount-feedback.state.count){
             feedback.addInfo(infos: .wrong)
         }
 
