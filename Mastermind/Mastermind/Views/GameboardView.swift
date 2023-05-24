@@ -20,12 +20,12 @@ struct GameboardView: View {
 
     var body: some View {
         VStack {
-            ForEach(0 ..< 12) { rowIndex in
+            ForEach(0 ..< viewModel.rowCount) { rowIndex in
                 HStack {
                     FeedbackCirclesView(feedbackColors: viewModel.getFeedbackCircleColorsForRow(rowIndex))
                         .padding(.leading)
                         .padding(.trailing, 6.0)
-                    ForEach(0 ..< 4) { columnIndex in
+                    ForEach(0 ..< viewModel.columnCount) { columnIndex in
                         // das ViewModel gibt für jede Position auf dem Spielbrett eine Farbe zurück
                         let circleColors = viewModel.getCircleColorsForRow(rowIndex)
                         let color = circleColors[columnIndex]
