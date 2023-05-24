@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct ColorCodeView: View {
+    @ObservedObject var viewModel = MastermindViewModel()
     let colorCode: [Color]
     var isGameOver: Bool
 
 
 
     var body: some View {
-        let color: [Color] = isGameOver ? colorCode : [.gray, .gray, .gray, .gray]
+        let color: [Color] = isGameOver ? colorCode : Array(repeating: .gray, count: viewModel.columnCount)
         VStack {
             // Display only one row
-            ForEach(0..<1) { rowIndex in
+            ForEach(0..<1) { _ in
                 HStack {
                     // Display 4 colored circles
-                    ForEach(0..<4) { columnIndex in
-                        if rowIndex < colorCode.count { // check if the current index is valid
+                    ForEach(0..<viewModel.columnCount) { columnIndex in
+                        if columnIndex < colorCode.count { // check if the current index is valid
                             Circle()
                                 .foregroundColor(color[columnIndex])
                                 .overlay(Circle().stroke(Color.black, lineWidth: 2))
@@ -39,7 +40,7 @@ struct ColorCodeView: View {
 
 struct ColorCodeView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green], isGameOver: false)
-        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green], isGameOver: true)
+        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green, .yellow], isGameOver: false)
+        ColorCodeView(colorCode: [.indigo, .purple, .blue, .green, .yellow], isGameOver: true)
     }
 }

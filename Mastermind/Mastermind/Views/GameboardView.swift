@@ -10,13 +10,20 @@ import SwiftUI
 struct GameboardView: View {
     @ObservedObject var viewModel: MastermindViewModel // um die Spiellogik auszuführen
 
-    @State var lockedRows = 10
-    @State var coloredRowIndex = 12
+    @State var lockedRows: Int
+    @State var coloredRowIndex: Int
     
     // speichern den ausgewählten Kreis und seine Position
     @State var selectedColor = Color.red
-    @State var selectedRowIndex = 11
+    @State var selectedRowIndex: Int
     @State var selectedColumnIndex = 0
+
+    init(viewModel: MastermindViewModel) {
+        self.viewModel = viewModel
+        _lockedRows = State(initialValue: viewModel.rowCount - 2)
+        _coloredRowIndex = State(initialValue: viewModel.rowCount)
+        _selectedRowIndex = State(initialValue: viewModel.rowCount - 1)
+    }
 
     var body: some View {
         VStack {
@@ -54,9 +61,9 @@ struct GameboardView: View {
             HStack {
                 Button(action: {
                     viewModel.newGame()
-                    lockedRows = 10
-                    coloredRowIndex = 12
-                    selectedRowIndex = 11
+                    lockedRows = viewModel.rowCount - 2
+                    coloredRowIndex = viewModel.rowCount
+                    selectedRowIndex = viewModel.rowCount - 1
                     selectedColumnIndex = 0
                 }) {
                     Text("New Game")
@@ -66,8 +73,8 @@ struct GameboardView: View {
                 Button(action: {
                     viewModel.submitGuess()
                     if viewModel.isGameOver {
-                        lockedRows = 11
-                        coloredRowIndex = 12
+                        lockedRows = viewModel.rowCount - 1
+                        coloredRowIndex = viewModel.rowCount
                     }else{
                         lockedRows -= 1
                         selectedRowIndex -= 1
