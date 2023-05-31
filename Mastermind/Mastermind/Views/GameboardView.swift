@@ -10,19 +10,29 @@ import SwiftUI
 struct GameboardView: View {
     @ObservedObject var viewModel: MastermindViewModel // um die Spiellogik auszuführen
 
-    @State var lockedRows = 10
-    @State var coloredRowIndex = 12
+    @State var lockedRows: Int
+    @State var coloredRowIndex: Int
     
     // speichern den ausgewählten Kreis und seine Position
     @State var selectedColor = Color.red
-    @State var selectedRowIndex = 11
+    @State var selectedRowIndex: Int
     @State var selectedColumnIndex = 0
+
+    init(viewModel: MastermindViewModel) {
+        self.viewModel = viewModel
+        _lockedRows = State(initialValue: viewModel.rowCount - 2)
+        _coloredRowIndex = State(initialValue: viewModel.rowCount)
+        _selectedRowIndex = State(initialValue: viewModel.rowCount - 1)
+    }
 
     var body: some View {
         VStack {
-            ForEach(0 ..< 12) { rowIndex in
+            ForEach(0 ..< viewModel.rowCount) { rowIndex in
                 HStack {
-                    ForEach(0 ..< 4) { columnIndex in
+                    FeedbackCirclesView(feedbackColors: viewModel.getFeedbackCircleColorsForRow(rowIndex))
+                        .padding(.leading)
+                        .padding(.trailing, 6.0)
+                    ForEach(0 ..< viewModel.columnCount) { columnIndex in
                         // das ViewModel gibt für jede Position auf dem Spielbrett eine Farbe zurück
                         let circleColors = viewModel.getCircleColorsForRow(rowIndex)
                         let color = circleColors[columnIndex]
@@ -33,10 +43,11 @@ struct GameboardView: View {
                                 selectedRowIndex = rowIndex
                                 selectedColumnIndex = columnIndex
                             }
-                            .opacity(rowIndex <= lockedRows ? 0.5 : 1.0) // reduziert die Deckkraft der Kreise in den gesperrten Reihen
+                            .opacity(rowIndex <= lockedRows && viewModel.isGameOver == false ? 0.5 : 1.0) // reduziert die Deckkraft der Kreise in den gesperrten Reihen
                     }
                 }
             }
+            .padding(.trailing, 94.0)
             // zeigt das Farbmenu
             ColorMenuView(colors: viewModel.colors,
                           viewModel: viewModel,
@@ -50,18 +61,27 @@ struct GameboardView: View {
             HStack {
                 Button(action: {
                     viewModel.newGame()
-                    lockedRows = 10
-                    coloredRowIndex = 12
+                    lockedRows = viewModel.rowCount - 2
+                    coloredRowIndex = viewModel.rowCount
+                    selectedRowIndex = viewModel.rowCount - 1
+                    selectedColumnIndex = 0
                 }) {
                     Text("New Game")
                 }
                 .buttonStyle(PurpleButton())
 
                 Button(action: {
-                    lockedRows -= 1
-                    selectedRowIndex -= 1
-                    selectedColumnIndex = 0
-                    coloredRowIndex -= 1
+                    viewModel.submitGuess()
+                    if viewModel.isGameOver {
+                        lockedRows = viewModel.rowCount - 1
+                        coloredRowIndex = viewModel.rowCount
+                    }else{
+                        lockedRows -= 1
+                        selectedRowIndex -= 1
+                        selectedColumnIndex = 0
+                        coloredRowIndex -= 1
+                    }
+
                 }) {
                     Text("Submit")
                 }

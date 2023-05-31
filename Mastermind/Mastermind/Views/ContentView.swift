@@ -8,16 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = MastermindViewModel()
+    @ObservedObject var viewModel = MastermindViewModel()
+    @State private var isGameWonViewPresented = false
+    @State private var isGameLostViewPresented = false
 
     var body: some View {
-        VStack {
-            Spacer()
-            ColorCodeView(colorCode: viewModel.colorCode)
-            Spacer()
-            GameboardView(viewModel: viewModel)
+        ZStack {
+            GameView(viewModel: viewModel) // das Spiel wird dargestellt
+                .blur(radius: isGameWonViewPresented || isGameLostViewPresented ? 20 : 0)
+
+            if isGameWonViewPresented {
+                GameWonView(viewModel: viewModel, closeAction: {
+                    isGameWonViewPresented = false
+                }, wonGame: $viewModel.wonGame)
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeInOut(duration: 0.3))
+            }
+
+            if isGameLostViewPresented {
+                GameLostView(viewModel: viewModel, closeAction: {
+                    isGameLostViewPresented = false
+                }, lostGame: $viewModel.lostGame)
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeInOut(duration: 0.3))
+            }
+
         }
-        .padding()
+        .onReceive(viewModel.$wonGame) { wonGame in
+            if wonGame {
+                isGameWonViewPresented = true
+            }
+        }
+        .onReceive(viewModel.$lostGame) { lostGame in
+            if lostGame {
+                isGameLostViewPresented = true
+            }
+        }
     }
 }
 
